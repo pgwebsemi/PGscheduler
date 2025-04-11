@@ -4,27 +4,22 @@ import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 
-// 認証が不要なパスhはここに書くこと。
-const PUBLIC_PATHS = ['/login'];
-
 export default function AuthChecker({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const pathname = usePathname(); // 現在のURL
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (!loading) { 
-      const isPublicPath = PUBLIC_PATHS.includes(pathname); 
-  
-      if (!user && !isPublicPath) {
-  
-        router.push('/login');  
-      } else if (user && isPublicPath) {
-       
-        router.push('/');  
-      }
+    if (loading) return;
+
+    if (!user && pathname !== '/login') {
+      router.replace('/login');
     }
-  }, [user, loading, pathname, router]); 
+
+    if (user && pathname === '/login') {
+      router.replace('/');
+    }
+  }, [user, loading, pathname, router]);
 
   if (loading) {
     return (
@@ -34,10 +29,9 @@ export default function AuthChecker({ children }: { children: React.ReactNode })
     );
   }
 
-  const isPublicPath = PUBLIC_PATHS.includes(pathname);
-  if (isPublicPath || user) {
-    return <>{children}</>;
-  }
+  if (!user && pathname !== '/login') {
+    return null;
+  }//loginへリダイレクトさせる。
 
-  return null;
-} 
+  return <>{children}</>;
+}
