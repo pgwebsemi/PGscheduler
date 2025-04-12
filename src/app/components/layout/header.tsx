@@ -1,35 +1,27 @@
+"use client";
 import React from "react";
-
+import { useRouter } from "next/navigation";
 const Header = () => {
+  const router = useRouter();
+
+  const handleClick = (path: string) => {
+    router.push(path); // 飛びたいページのパス
+  };
   return (
-    <div className="relative w-[1280px] h-[76.08px] bg-[#D9D9D9] flex items-center">
-      {/* Reactロゴ */}
-      <div className="relative h-[54.32px] w-[61px] ml-[2.03%]">
-        <img
-          src="/React-icon.svg"
-          alt="React Logo"
-          className="w-full h-full object-contain"
-        />
+    <header className="w-full flex justify-center bg-gray-100">
+      <div className="text-red-500">test</div>
+      <div className="flex flex-row justify-center items-center gap-4 bg-[#D9D9D9] w-[600px] h-[100px]">
+        <div className="cursor-pointer border rounded p-4 shadow hover:shadow-lg">
+          <img src="/React-icon.svg" className="w-16 h-16 bg-[#ACACAC]" />
+        </div>
+        <div className="cursor-pointer border rounded p-4 shadow hover:shadow-lg">
+          <img src="/React-icon.svg" className="w-16 h-16" />
+        </div>
+        <div className="cursor-pointer border rounded p-4 shadow hover:shadow-lg">
+          <img src="/React-icon.svg" className="w-16 h-16" />
+        </div>
       </div>
-
-      {/* Todayアイコン */}
-      <div className="relative h-[54.32px] w-[61px] ml-[2.03%]">
-        <img
-          src="/today.svg"
-          alt="Today Icon"
-          className="w-full h-full object-contain"
-        />
-      </div>
-
-      {/* Gmail Groupsアイコン */}
-      <div className="absolute w-[91px] h-[91px] left-[728px] top-[-8px]">
-        <img
-          src="/gmail_groups.svg"
-          alt="Gmail Groups Icon"
-          className="w-full h-full object-contain"
-        />
-      </div>
-    </div>
+    </header>
   );
 };
 
