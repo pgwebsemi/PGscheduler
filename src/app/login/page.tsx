@@ -27,7 +27,7 @@ export default function LoginPage() {
         <div className="flex flex-col gap-4">
           <button
             onClick={handleGoogleLogin}
-            className="flex items-center justify-center gap-3 rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow transition hover:shadow-md dark:bg-gray-700 dark:text-gray-200"
+            className="flex cursor-pointer items-center justify-center gap-3 rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow transition hover:shadow-md dark:bg-gray-700 dark:text-gray-200"
           >
             <Image
               src="/google-logo.png"

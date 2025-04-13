@@ -29,9 +29,7 @@ export default function AuthChecker({ children }: { children: React.ReactNode })
     );
   }
 
-  if (!user && pathname !== '/login') {
-    return null;
-  }//loginへリダイレクトさせる。
+
 
   return <>{children}</>;
 }
