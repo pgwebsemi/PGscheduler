@@ -15,7 +15,7 @@ const Header = () => {
           <img src="/React-icon.svg" className="w-16 h-16 bg-[#ACACAC]" />
         </div>
         <div className="cursor-pointer border rounded p-4 shadow hover:shadow-lg">
-          <img src="/React-icon.svg" className="w-16 h-16" />
+          <img src="/.svg" className="w-16 h-16" />
         </div>
         <div className="cursor-pointer border rounded p-4 shadow hover:shadow-lg">
           <img src="/React-icon.svg" className="w-16 h-16" />
