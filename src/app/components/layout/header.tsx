@@ -8,7 +8,7 @@ const Header = () => {
     router.push(path);
   };
   return (
-    <header className="w-full flex flex-row justify-between items-center bg-[#D9D9D9] w-[600px] h-[100px] px-4">
+    <header className="w-full flex flex-row justify-between items-center bg-[#D9D9D9] px-4">
       <div>
         <Image src="/React-icon.svg" alt="react Icon" width={64} height={64} />
       </div>
