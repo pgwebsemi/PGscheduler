@@ -1,13 +1,13 @@
 # ユーザー（Firebase AuthのIDで一意）
 type User @table {
   id: String! @col(name: "user_auth")
-  groupId: UUID @col(name: "group_id") @foreignKey(references: "Group.id")
+  group: Group @ref
 }
 
 # 管理者
 type Admin @table {
   id: UUID! @default(expr: "uuidV4()")
-  userId: String! @col(name: "user_id") @foreignKey(references: "User.id")
+  user: User! @ref
   createdAt: Timestamp!
   updatedAt: Timestamp!
 }
@@ -16,7 +16,7 @@ type Admin @table {
 type Group @table {
   id: UUID! @default(expr: "uuidV4()")
   name: String!
-  representativeId: String @col(name: "representative_id") @foreignKey(references: "User.id")
+  representative: User @ref
   createdAt: Timestamp!
   updatedAt: Timestamp!
 }
@@ -24,10 +24,10 @@ type Group @table {
 # 日付スケジュール
 type ScheduleDate @table {
   id: UUID! @default(expr: "uuidV4()")
-  userId: String! @col(name: "user_id") @foreignKey(references: "User.id")
+  user: User! @ref
   date: Date! @col(name: "schedule_date")
-  dayOfWeek: String! @col(name: "day_of_week") @maxLength(value: 3)
-  selectionData: TimeSelection! @unique
+  dayOfWeek: String! @col(name: "day_of_week")
+  selectionData: TimeSelection! @ref @unique
   createdAt: Timestamp!
   updatedAt: Timestamp!
 }
@@ -35,7 +35,7 @@ type ScheduleDate @table {
 # 30分ごとの時間スロット選択データ
 type TimeSelection @table {
   id: UUID! @default(expr: "uuidV4()")
-  scheduleDate: ScheduleDate! @unique
+  scheduleDate: ScheduleDate! @ref
 
   # 00:00〜24:00の各時間選択データ（48個）
   slot0000: Boolean! @default(value: false)
