@@ -1,13 +1,32 @@
 # ユーザー（Firebase AuthのIDで一意）
 type User @table {
   id: String! @col(name: "user_auth")
+  groupId: UUID @col(name: "group_id") @foreignKey(references: "Group.id")
+}
+
+# 管理者
+type Admin @table {
+  id: UUID! @default(expr: "uuidV4()")
+  userId: String! @col(name: "user_id") @foreignKey(references: "User.id")
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+# グループ
+type Group @table {
+  id: UUID! @default(expr: "uuidV4()")
+  name: String!
+  representativeId: String @col(name: "representative_id") @foreignKey(references: "User.id")
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
 }
 
 # 日付スケジュール
 type ScheduleDate @table {
   id: UUID! @default(expr: "uuidV4()")
-  user: User!
+  userId: String! @col(name: "user_id") @foreignKey(references: "User.id")
   date: Date! @col(name: "schedule_date")
+  dayOfWeek: Int! @col(name: "day_of_week")
   selectionData: TimeSelection! @unique
   createdAt: Timestamp!
   updatedAt: Timestamp!
