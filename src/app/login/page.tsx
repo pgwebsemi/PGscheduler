@@ -1,5 +1,4 @@
-'use client';
-
+"use client";
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
@@ -11,14 +10,14 @@ export default function LoginPage() {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
-      router.push('/');
+      router.push("/");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex items-center justify-center h-full">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
         <h1 className="mb-6 text-center text-2xl font-bold">
           PGscheduler
@@ -38,7 +37,7 @@ export default function LoginPage() {
             />
             <span>Googleでログイン</span>
           </button>
-          
+
           <button
             disabled
             className="flex cursor-not-allowed items-center justify-center gap-3 rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-400 shadow opacity-60 dark:bg-gray-700 dark:text-gray-500"
