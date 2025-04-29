@@ -1,15 +1,21 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { 
-  signOut, 
-  onAuthStateChanged, 
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
+import {
+  signOut,
+  onAuthStateChanged,
   User,
   GoogleAuthProvider,
   GithubAuthProvider,
-  signInWithPopup
-} from 'firebase/auth';
-import { auth } from './firebase';
+  signInWithPopup,
+} from "firebase/auth";
+import { auth } from "./firebase";
 
 type AuthContextType = {
   user: User | null;
@@ -21,12 +27,10 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-
-
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }
@@ -49,7 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
     } catch (error) {
-      console.error('Googleログインエラー:', error);
+      console.error("Googleログインエラー:", error);
       throw error;
     }
   };
@@ -59,7 +63,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const provider = new GithubAuthProvider();
       await signInWithPopup(auth, provider);
     } catch (error) {
-      console.error('Githubログインエラー:', error);
+      console.error("Githubログインエラー:", error);
       throw error;
     }
   };
@@ -68,7 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       await signOut(auth);
     } catch (error) {
-      console.error('ログアウトエラー:', error);
+      console.error("ログアウトエラー:", error);
       throw error;
     }
   };
@@ -82,4 +86,4 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-} 
+}

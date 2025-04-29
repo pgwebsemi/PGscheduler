@@ -1,10 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import { useAuth } from '@/lib/auth-context';
+import { useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/lib/auth-context";
 
-export default function AuthChecker({ children }: { children: React.ReactNode }) {
+export default function AuthChecker({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { user, loading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
@@ -12,12 +16,12 @@ export default function AuthChecker({ children }: { children: React.ReactNode })
   useEffect(() => {
     if (loading) return;
 
-    if (!user && pathname !== '/login') {
-      router.replace('/login');
+    if (!user && pathname !== "/login") {
+      router.replace("/login");
     }
 
-    if (user && pathname === '/login') {
-      router.replace('/');
+    if (user && pathname === "/login") {
+      router.replace("/");
     }
   }, [user, loading, pathname, router]);
 
@@ -28,8 +32,6 @@ export default function AuthChecker({ children }: { children: React.ReactNode })
       </div>
     );
   }
-
-
 
   return <>{children}</>;
 }
