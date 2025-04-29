@@ -62,5 +62,7 @@
 
 ## その他
 
-命名規則はケバブケース
-ex)`kebab-case.tsx`
+- 命名規則はケバブケース
+  ex)`kebab-case.tsx`
+
+- push する前に `npm run check` を行い、lintのチェックを全てパスしていることを確認すること
