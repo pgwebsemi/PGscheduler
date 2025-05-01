@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { mockGroups } from "../mock/group";
 import {
   PlusIcon,
   TrashIcon,
@@ -9,35 +10,9 @@ import {
   PencilIcon,
 } from "lucide-react";
 
-const mockGroups = [
-  {
-    id: "groupA",
-    name: "Group A",
-    members: [
-      { id: "member1", name: "中澤" },
-      { id: "member2", name: "田中" },
-      { id: "member3", name: "安室" },
-      { id: "member4", name: "竹本" },
-      { id: "member5", name: "濃茶" },
-    ],
-  },
-  {
-    id: "groupB",
-    name: "Group B",
-    members: [
-      { id: "member1", name: "中澤" },
-      { id: "member2", name: "田中" },
-      { id: "member3", name: "安室" },
-      { id: "member4", name: "竹本" },
-      { id: "member5", name: "濃茶" },
-    ],
-  },
-];
-
 export default function GroupManagementPage() {
   const [groups, setGroups] = useState(mockGroups);
   const [selectedGroupId, setSelectedGroupId] = useState("groupA");
-
   const selectedGroup = groups.find((group) => group.id === selectedGroupId);
 
   const handleAddGroup = () => {
@@ -137,10 +112,6 @@ export default function GroupManagementPage() {
         <Button size="icon" variant="outline" onClick={handleAddGroup}>
           <PlusIcon className="h-5 w-5" />
         </Button>
-
-        <div className="font-bold text-lg bg-gray-100 p-2 rounded shadow min-w-[120px] text-center">
-          {selectedGroup?.name}
-        </div>
 
         <Button size="icon" variant="outline" onClick={handleMoveUpGroup}>
           <ChevronUpIcon className="h-5 w-5" />
