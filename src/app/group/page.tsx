@@ -113,6 +113,20 @@ export default function GroupManagementPage() {
           <PlusIcon className="h-5 w-5" />
         </Button>
 
+        <input
+          type="text"
+          value={selectedGroup?.name || ""}
+          onChange={(e) => {
+            const updatedGroups = groups.map((group) =>
+              group.id === selectedGroup?.id
+                ? { ...group, name: e.target.value }
+                : group
+            );
+            setGroups(updatedGroups);
+          }}
+          className="font-bold text-lg bg-gray-100 p-2 rounded shadow min-w-[120px] text-center"
+        />
+
         <Button size="icon" variant="outline" onClick={handleMoveUpGroup}>
           <ChevronUpIcon className="h-5 w-5" />
         </Button>
