@@ -39,7 +39,7 @@ export default function GroupManagementPage() {
 
   const handleMoveUpGroup = () => {
     const currentIndex = groups.findIndex(
-      (group) => group.id === selectedGroupId
+      (group) => group.id === selectedGroupId,
     );
     if (currentIndex > 0) {
       const newSelectedGroupId = groups[currentIndex - 1].id;
@@ -49,7 +49,7 @@ export default function GroupManagementPage() {
 
   const handleMoveDownGroup = () => {
     const currentIndex = groups.findIndex(
-      (group) => group.id === selectedGroupId
+      (group) => group.id === selectedGroupId,
     );
     if (currentIndex < groups.length - 1) {
       const newSelectedGroupId = groups[currentIndex + 1].id;
@@ -66,7 +66,7 @@ export default function GroupManagementPage() {
     const updatedGroups = groups.map((group) =>
       group.id === selectedGroup.id
         ? { ...group, members: [...group.members, newMember] }
-        : group
+        : group,
     );
     setGroups(updatedGroups);
   };
@@ -79,7 +79,7 @@ export default function GroupManagementPage() {
             ...group,
             members: group.members.filter((member) => member.id !== memberId),
           }
-        : group
+        : group,
     );
     setGroups(updatedGroups);
   };
@@ -93,10 +93,10 @@ export default function GroupManagementPage() {
         ? {
             ...group,
             members: group.members.map((member) =>
-              member.id === memberId ? { ...member, name: newName } : member
+              member.id === memberId ? { ...member, name: newName } : member,
             ),
           }
-        : group
+        : group,
     );
     setGroups(updatedGroups);
   };
@@ -120,7 +120,7 @@ export default function GroupManagementPage() {
             const updatedGroups = groups.map((group) =>
               group.id === selectedGroup?.id
                 ? { ...group, name: e.target.value }
-                : group
+                : group,
             );
             setGroups(updatedGroups);
           }}
