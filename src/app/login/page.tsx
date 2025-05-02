@@ -1,7 +1,7 @@
 "use client";
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/lib/auth-context';
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/auth-context";
 
 export default function LoginPage() {
   const { loginWithGoogle } = useAuth();
@@ -19,10 +19,8 @@ export default function LoginPage() {
   return (
     <div className="flex items-center justify-center h-full">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
-        <h1 className="mb-6 text-center text-2xl font-bold">
-          PGscheduler
-        </h1>
-        
+        <h1 className="mb-6 text-center text-2xl font-bold">PGscheduler</h1>
+
         <div className="flex flex-col gap-4">
           <button
             onClick={handleGoogleLogin}

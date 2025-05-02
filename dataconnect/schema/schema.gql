@@ -1,0 +1,89 @@
+# ユーザー（Firebase AuthのIDで一意）
+type User @table {
+  id: String! @col(name: "user_auth")
+  group: Group @ref
+}
+
+# 管理者
+type Admin @table {
+  id: UUID! @default(expr: "uuidV4()")
+  user: User! @ref
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+# グループ
+type Group @table {
+  id: UUID! @default(expr: "uuidV4()")
+  name: String!
+  representative: User @ref
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+# 日付スケジュール
+type ScheduleDate @table {
+  id: UUID! @default(expr: "uuidV4()")
+  user: User! @ref
+  date: Date! @col(name: "schedule_date")
+  dayOfWeek: String! @col(name: "day_of_week")
+  selectionData: TimeSelection! @ref @unique
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+# 30分ごとの時間スロット選択データ
+type TimeSelection @table {
+  id: UUID! @default(expr: "uuidV4()")
+  scheduleDate: ScheduleDate! @ref
+
+  # 00:00〜24:00の各時間選択データ（48個）
+  slot0000: Boolean! @default(value: false)
+  slot0030: Boolean! @default(value: false)
+  slot0100: Boolean! @default(value: false)
+  slot0130: Boolean! @default(value: false)
+  slot0200: Boolean! @default(value: false)
+  slot0230: Boolean! @default(value: false)
+  slot0300: Boolean! @default(value: false)
+  slot0330: Boolean! @default(value: false)
+  slot0400: Boolean! @default(value: false)
+  slot0430: Boolean! @default(value: false)
+  slot0500: Boolean! @default(value: false)
+  slot0530: Boolean! @default(value: false)
+  slot0600: Boolean! @default(value: false)
+  slot0630: Boolean! @default(value: false)
+  slot0700: Boolean! @default(value: false)
+  slot0730: Boolean! @default(value: false)
+  slot0800: Boolean! @default(value: false)
+  slot0830: Boolean! @default(value: false)
+  slot0900: Boolean! @default(value: false)
+  slot0930: Boolean! @default(value: false)
+  slot1000: Boolean! @default(value: false)
+  slot1030: Boolean! @default(value: false)
+  slot1100: Boolean! @default(value: false)
+  slot1130: Boolean! @default(value: false)
+  slot1200: Boolean! @default(value: false)
+  slot1230: Boolean! @default(value: false)
+  slot1300: Boolean! @default(value: false)
+  slot1330: Boolean! @default(value: false)
+  slot1400: Boolean! @default(value: false)
+  slot1430: Boolean! @default(value: false)
+  slot1500: Boolean! @default(value: false)
+  slot1530: Boolean! @default(value: false)
+  slot1600: Boolean! @default(value: false)
+  slot1630: Boolean! @default(value: false)
+  slot1700: Boolean! @default(value: false)
+  slot1730: Boolean! @default(value: false)
+  slot1800: Boolean! @default(value: false)
+  slot1830: Boolean! @default(value: false)
+  slot1900: Boolean! @default(value: false)
+  slot1930: Boolean! @default(value: false)
+  slot2000: Boolean! @default(value: false)
+  slot2030: Boolean! @default(value: false)
+  slot2100: Boolean! @default(value: false)
+  slot2130: Boolean! @default(value: false)
+  slot2200: Boolean! @default(value: false)
+  slot2230: Boolean! @default(value: false)
+  slot2300: Boolean! @default(value: false)
+  slot2330: Boolean! @default(value: false)
+}
