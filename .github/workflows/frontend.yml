@@ -45,4 +45,4 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           working-directory: .
           vercel-project-name: pgscheduler-web
-          vercel-args: "--prod--yes"
+          vercel-args: "--prod --yes"
