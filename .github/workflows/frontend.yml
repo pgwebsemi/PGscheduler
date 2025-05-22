@@ -8,17 +8,10 @@ on:
 
 jobs:
   build:
-    name: Run checks
+    name: Run build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Debug workspace layout
-        run: |
-          echo ">>> PWD: $(pwd)"
-          echo ">>> ROOT files:"
-          ls -la
-          echo ">>> src/ exists?"; ls -la src || true
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
