@@ -7,11 +7,18 @@ on:
     branches: [main]
 
 jobs:
-  checks:
+  build:
     name: Run checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Debug workspace layout
+        run: |
+          echo ">>> PWD: $(pwd)"
+          echo ">>> ROOT files:"
+          ls -la
+          echo ">>> src/ exists?"; ls -la src || true
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -29,11 +36,7 @@ jobs:
 
       - name: TypeScript type-check
         run: npx tsc --noEmit
-
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
+      
       - name: Build Next.js project
         run: npm run build   
 
