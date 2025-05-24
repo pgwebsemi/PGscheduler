@@ -74,6 +74,26 @@ export default function ScheduleManagementPage() {
           <ChevronRightIcon className="h-4 w-4" />
         </Button>
       </div>
+      {/* スケジュール表 */}
+      <div className="flex gap-6 overflow-x-auto px-8">
+        {weekDates.map((day, index) => (
+          <div key={day} className="flex flex-col items-center w-12">
+            <div className="font-bold text-sm mb-1">{daysOfWeek[index]}</div>
+            <div className="text-xs mb-2">{day}</div>
+            {Array.from({ length: 24 }, (_, hour) => (
+              <div
+                key={hour}
+                className={`w-full h-7 mb-[2px] cursor-pointer rounded-md ${
+                  member.schedule?.[day]?.includes(hour)
+                    ? "bg-cyan-500"
+                    : "bg-gray-200"
+                }`}
+                onClick={() => toggleHour(day, hour)}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
