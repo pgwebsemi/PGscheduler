@@ -15,3 +15,27 @@ function getWeekDates(startDate: Date): string[] {
   }
   return dates;
 }
+
+export default function ScheduleManagementPage() {
+  const [member, setMember] = useState(initialMember);
+  const [startDate, setStartDate] = useState(() => new Date("2024-08-17"));
+  const weekDates = getWeekDates(startDate);
+// on offを切り替える関数
+  const toggleHour = (day: string, hour: number) => {
+    const hours = member.schedule?.[day] || [];
+    const newHours = hours.includes(hour)
+      ? hours.filter((h) => h !== hour)
+      : [...hours, hour];
+
+    setMember({
+      ...member,
+      schedule: {
+        ...member.schedule,
+        [day]: newHours,
+      },
+    });
+  };
+   
+  const handleSave = () => {
+    console.log("保存するスケジュール:", member);
+  };
