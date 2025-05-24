@@ -58,6 +58,21 @@ export default function ScheduleManagementPage() {
         >
           <ChevronLeftIcon className="h-4 w-4" />
         </Button>
+        <div className="text-lg font-semibold">
+          {weekDates[0]} 〜 {weekDates[6]}
+        </div>
+
+        <Button
+          size="icon"
+          variant="outline"
+          onClick={() => {
+            const newDate = new Date(startDate);
+            newDate.setDate(newDate.getDate() + 7);
+            setStartDate(newDate);
+          }}
+        >
+          <ChevronRightIcon className="h-4 w-4" />
+        </Button>
       </div>
     </div>
   );
