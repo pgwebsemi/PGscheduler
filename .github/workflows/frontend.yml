@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  checks:
-    name: Run checks
+  build:
+    name: Run build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: ESLint
         run: npm run lint
@@ -29,25 +29,13 @@ jobs:
 
       - name: TypeScript type-check
         run: npx tsc --noEmit
-
-  deploy:
-    name: Deploy to Vercel
-    needs: checks
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20"
-
-      - name: Install Vercel CLI
-        run: npm install -g vercel
+      
+      - name: Build Next.js project
+        run: npm run build   
 
       - name: Deploy to Vercel
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: vercel --prod --confirm --scope $VERCEL_ORG_ID --project $VERCEL_PROJECT_ID
+        uses: amondnet/vercel-action@v25 
+        with:                          
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
