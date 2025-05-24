@@ -94,6 +94,9 @@ export default function ScheduleManagementPage() {
           </div>
         ))}
       </div>
+      <Button onClick={handleSave} className="mt-6">
+        保存
+      </Button>
     </div>
   );
 }
