@@ -74,26 +74,40 @@ export default function ScheduleManagementPage() {
           <ChevronRightIcon className="h-4 w-4" />
         </Button>
       </div>
-      {/* スケジュール表 */}
-      <div className="flex gap-6 overflow-x-auto px-8">
-        {weekDates.map((day, index) => (
-          <div key={day} className="flex flex-col items-center w-12">
-            <div className="font-bold text-sm mb-1">{daysOfWeek[index]}</div>
-            <div className="text-xs mb-2">{day}</div>
-            {Array.from({ length: 24 }, (_, hour) => (
-              <div
-                key={hour}
-                className={`w-full h-7 mb-[2px] cursor-pointer rounded-md ${
-                  member.schedule?.[day]?.includes(hour)
-                    ? "bg-cyan-500"
-                    : "bg-gray-200"
-                }`}
-                onClick={() => toggleHour(day, hour)}
-              />
-            ))}
-          </div>
-        ))}
+      <div className="flex overflow-x-auto px-8 gap-6">
+        {/* 左側：時間ラベル */}
+        <div className="flex flex-col items-end w-12 text-sm text-gray-600 font-medium">
+          <div className="h-[48px]" /> {/* 上の曜日+日付と高さ揃え */}
+          {Array.from({ length: 24 }, (_, hour) => (
+            <div key={hour} className="h-7 mb-[2px] pr-1">
+              {hour}:00
+            </div>
+          ))}
+        </div>
+
+        {/* 右側：各曜日列 */}
+        <div className="flex gap-4">
+          {weekDates.map((day, index) => (
+            <div key={day} className="flex flex-col items-center w-12">
+              <div className="font-bold text-sm mb-1">{daysOfWeek[index]}</div>
+              <div className="text-xs mb-2">{day}</div>
+              {Array.from({ length: 24 }, (_, hour) => (
+                <div
+                  key={hour}
+                  title={`${hour}:00`}
+                  className={`w-full h-7 mb-[2px] cursor-pointer rounded-md ${
+                    member.schedule?.[day]?.includes(hour)
+                      ? "bg-cyan-500"
+                      : "bg-gray-200"
+                  }`}
+                  onClick={() => toggleHour(day, hour)}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
+
       <Button onClick={handleSave} className="mt-6">
         保存
       </Button>

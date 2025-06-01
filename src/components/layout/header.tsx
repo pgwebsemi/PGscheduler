@@ -27,7 +27,7 @@ const Header = () => {
         </button>
         <button
           className="cursor-pointer rounded p-4 hover:bg-black/5"
-          onClick={() => handleClick("/calendar")}
+          onClick={() => handleClick("/schedule")}
         >
           <Image
             src="/calendar.svg"
@@ -38,7 +38,7 @@ const Header = () => {
         </button>
         <button
           className="cursor-pointer rounded p-4 hover:bg-black/5"
-          onClick={() => handleClick("/schedule")}
+          onClick={() => handleClick("/group")}
         >
           <Image src="/users.svg" alt="users Icon" width={64} height={64} />
         </button>
